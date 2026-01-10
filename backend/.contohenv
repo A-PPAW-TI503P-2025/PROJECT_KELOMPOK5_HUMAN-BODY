@@ -1,0 +1,6 @@
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD= ???  # Ganti dengan password workbench Anda
+DB_NAME=simore_db
+DB_PORT=3308

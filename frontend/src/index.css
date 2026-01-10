@@ -1,0 +1,14 @@
+.room-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 50px;
+}
+.room-card {
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  width: 200px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
