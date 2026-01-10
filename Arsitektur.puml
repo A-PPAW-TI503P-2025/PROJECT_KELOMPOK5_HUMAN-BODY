@@ -1,4 +1,6 @@
 @startuml
+title Arsitektur Sistem Simore (Overall Architecture)
+
 allow_mixing
 skinparam componentStyle rectangle
 
