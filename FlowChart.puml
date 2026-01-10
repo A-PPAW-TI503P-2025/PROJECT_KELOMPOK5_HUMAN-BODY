@@ -1,0 +1,25 @@
+@startuml
+start
+:Inisialisasi Sensor PIR;
+
+repeat
+  :Baca Status Sensor PIR (HIGH/LOW);
+  
+  if (Motion Detected?) then (Yes)
+    :Set Status = OCCUPIED;
+    :Kirim Data ke Server;
+  else (No)
+    :Cek Waktu Terakhir Gerak;
+    if (Idle Time > 5 Menit?) then (Yes)
+        :Set Status = AVAILABLE;
+        :Kirim Data ke Server;
+    else (No)
+        :Keep Current Status;
+    endif
+  endif
+  
+  :Delay Sampling (e.g. 2 detik);
+repeat while (Power On)
+
+stop
+@enduml

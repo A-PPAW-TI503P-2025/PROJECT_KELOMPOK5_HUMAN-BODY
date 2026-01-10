@@ -1,40 +1,37 @@
 @startuml
-skinparam classAttributeIconSize 0
-
 package "Backend System (Node.js)" {
-
+    
     class IotController {
-        + receiveSensorData(req, res)
-        + checkGhostBooking()
-        - updateRoomStatus(roomId, status)
+        +receiveSensorData(req, res)
+        +checkGhostBooking()
+        -updateRoomStatus(roomId, status)
     }
 
     class BookingController {
-        + createReservation(req, res)
-        + getDailySchedule(req, res)
-        + cancelBooking(id)
+        +createReservation(req, res)
+        +getDailySchedule(req, res)
+        +cancelBooking(id)
     }
 
     class RoomModel {
-        + id: Integer
-        + name: String
-        + current_temp: Float
-        + is_occupied: Boolean
-        + save()
-        + findOne()
+        +id: Integer
+        +name: String
+        +status: ENUM('AVAILABLE', 'OCCUPIED')
+        +last_motion_detected: DateTime
+        +save()
+        +findOne()
     }
 
     class LogModel {
-        + id: Integer
-        + timestamp: DateTime
-        + create()
+        +id: Integer
+        +room_id: Integer
+        +motion_detected: Boolean
+        +timestamp: DateTime
+        +create()
     }
 
+    IotController ..> RoomModel : updates
+    IotController ..> LogModel : creates
+    BookingController ..> RoomModel : checks availability
 }
-
-' Relasi
-IotController ..> RoomModel : updates >
-IotController ..> LogModel : creates >
-BookingController ..> RoomModel : checks availability >
-
 @enduml

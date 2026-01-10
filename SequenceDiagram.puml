@@ -1,0 +1,31 @@
+@startuml
+actor "Sensor IoT" as Sensor
+participant "Backend API" as Backend
+participant "Database" as DB
+participant "Dashboard UI" as UI
+actor "Pelayan" as Staff
+
+== Skenario: Deteksi Gerakan (Update Status) ==
+
+Sensor -> Backend : POST /api/update {room_id: 1, motion: 1}
+activate Backend
+
+Backend -> DB : Query Check Booking(room_id)
+activate DB
+DB --> Backend : Return Booking Status
+deactivate DB
+
+Backend -> DB : UPDATE rooms SET status='OCCUPIED', last_motion=NOW()
+activate DB
+DB --> Backend : Success
+deactivate DB
+
+Backend -> UI : Socket.io Event (Room Update)
+deactivate Backend
+
+activate UI
+UI -> UI : Update Warna Room (Merah)
+UI -> Staff : Tampilkan Notifikasi (Jika perlu)
+deactivate UI
+
+@enduml

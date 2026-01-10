@@ -1,25 +1,35 @@
 @startuml
-|Sensor IoT|
+title Activity Diagram - Sistem Simore (Motion Only)
+
+|Sensor IoT (ESP32)|
 start
-:Deteksi Gerakan/Suhu;
-:Kirim Data ke Server;
+:Deteksi Gerakan (PIR);
+:Kirim Data Gerakan ke Server;
 
 |Server (Backend)|
 :Terima Data Sensor;
-:Cek Status Reservasi di DB;
-if (Data Valid?) then (Ya)
-  :Update Status Room;
-  :Simpan Log History;
+:Cek Status Reservasi di Database;
+
+if (Data Valid / Perubahan Status?) then (Ya)
+    :Update Status Room\n(Occupied/Available);
+    :Simpan Log History;
 else (Tidak)
-  :Abaikan Data;
+    :Abaikan Data;
 endif
 
-|Dashboard Admin|
-:Auto-Refresh Tampilan;
-if (Status == Dirty/Kosong?) then (Ya)
-  :Tampilkan Notifikasi Merah;
-else (Normal)
-  :Update Warna Indikator;
+|Dashboard Admin (React)|
+:Auto-Refresh Tampilan\n(Polling/Socket);
+
+if (Status Room == OCCUPIED?) then (Ya)
+    :Update Warna Indikator (MERAH);
+else (TIDAK)
+    if (Status == AVAILABLE?) then (Ya)
+        :Update Warna Indikator (HIJAU);
+        :Tampilkan Notifikasi "Siap Bersih";
+    else (GHOST BOOKING)
+        :Tampilkan Alert (UNGU);
+    endif
 endif
+
 stop
 @enduml
