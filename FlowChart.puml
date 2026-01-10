@@ -1,4 +1,6 @@
 @startuml
+title Flowchart - Sistem Simore (Sensor PIR Logic)
+
 start
 :Inisialisasi Sensor PIR;
 

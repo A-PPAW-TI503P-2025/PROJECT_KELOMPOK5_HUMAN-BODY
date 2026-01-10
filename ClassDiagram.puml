@@ -1,4 +1,6 @@
 @startuml
+title Class Diagram - Sistem Simore (Backend)
+
 package "Backend System (Node.js)" {
     
     class IotController {
@@ -34,4 +36,5 @@ package "Backend System (Node.js)" {
     IotController ..> LogModel : creates
     BookingController ..> RoomModel : checks availability
 }
+
 @enduml

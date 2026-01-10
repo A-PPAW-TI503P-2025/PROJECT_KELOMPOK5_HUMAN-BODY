@@ -1,4 +1,6 @@
 @startuml
+title Use Case Simore (Motion Detection System)
+
 left to right direction
 actor "IoT Device (ESP32)" as Device
 actor "Pelayan / Admin" as User

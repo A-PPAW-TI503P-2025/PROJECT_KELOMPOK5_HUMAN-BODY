@@ -1,4 +1,6 @@
 @startuml
+title ERD - Sistem Simore (Database Schema)
+
 ' Konfigurasi tampilan agar rapi
 hide circle
 skinparam linetype ortho

@@ -1,4 +1,6 @@
 @startuml
+title Sequence Diagram - Sistem Simore (Motion Detection Flow)
+
 actor "Sensor IoT" as Sensor
 participant "Backend API" as Backend
 participant "Database" as DB
