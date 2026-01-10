@@ -1,0 +1,40 @@
+@startuml
+hide circle
+skinparam linetype ortho
+
+entity "Rooms" as rooms {
+  *id : INT <<PK>>
+  --
+  name : VARCHAR
+  status : ENUM ('AVAILABLE', 'OCCUPIED')
+  temperature : FLOAT
+  last_updated : DATETIME
+}
+
+entity "Reservations" as reservations {
+  *id : INT <<PK>>
+  --
+  *room_id : INT <<FK>>
+  customer_name : VARCHAR
+  start_time : DATETIME
+  end_time : DATETIME
+  status : ENUM ('ACTIVE', 'COMPLETED', 'NO_SHOW')
+}
+
+entity "Sensor_Logs" as logs {
+  *id : INT <<PK>>
+  --
+  *room_id : INT <<FK>>
+  motion_detected : BOOLEAN
+  temperature_value : FLOAT
+  recorded_at : DATETIME
+}
+
+' HUBUNGAN ANTAR TABEL
+' Satu ruangan bisa punya banyak log history
+rooms ||..|{ logs : "has history"
+
+' Satu ruangan bisa punya banyak jadwal reservasi
+rooms ||..|{ reservations : "has bookings"
+
+@enduml

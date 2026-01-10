@@ -1,0 +1,40 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "Backend System (Node.js)" {
+
+    class IotController {
+        + receiveSensorData(req, res)
+        + checkGhostBooking()
+        - updateRoomStatus(roomId, status)
+    }
+
+    class BookingController {
+        + createReservation(req, res)
+        + getDailySchedule(req, res)
+        + cancelBooking(id)
+    }
+
+    class RoomModel {
+        + id: Integer
+        + name: String
+        + current_temp: Float
+        + is_occupied: Boolean
+        + save()
+        + findOne()
+    }
+
+    class LogModel {
+        + id: Integer
+        + timestamp: DateTime
+        + create()
+    }
+
+}
+
+' Relasi
+IotController ..> RoomModel : updates >
+IotController ..> LogModel : creates >
+BookingController ..> RoomModel : checks availability >
+
+@enduml

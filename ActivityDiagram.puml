@@ -1,0 +1,25 @@
+@startuml
+|Sensor IoT|
+start
+:Deteksi Gerakan/Suhu;
+:Kirim Data ke Server;
+
+|Server (Backend)|
+:Terima Data Sensor;
+:Cek Status Reservasi di DB;
+if (Data Valid?) then (Ya)
+  :Update Status Room;
+  :Simpan Log History;
+else (Tidak)
+  :Abaikan Data;
+endif
+
+|Dashboard Admin|
+:Auto-Refresh Tampilan;
+if (Status == Dirty/Kosong?) then (Ya)
+  :Tampilkan Notifikasi Merah;
+else (Normal)
+  :Update Warna Indikator;
+endif
+stop
+@enduml
