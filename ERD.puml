@@ -1,24 +1,25 @@
 @startuml
+' Konfigurasi tampilan agar rapi
 hide circle
 skinparam linetype ortho
 
 entity "Rooms" as rooms {
   *id : INT <<PK>>
   --
-  name : VARCHAR
-  status : ENUM ('AVAILABLE', 'OCCUPIED')
-  temperature : FLOAT
-  last_updated : DATETIME
+  name : VARCHAR(50)
+  status : ENUM('AVAILABLE', 'OCCUPIED')
+  last_motion_detected : DATETIME
+  updated_at : DATETIME
 }
 
 entity "Reservations" as reservations {
   *id : INT <<PK>>
   --
   *room_id : INT <<FK>>
-  customer_name : VARCHAR
+  customer_name : VARCHAR(100)
   start_time : DATETIME
   end_time : DATETIME
-  status : ENUM ('ACTIVE', 'COMPLETED', 'NO_SHOW')
+  status : ENUM('ACTIVE', 'COMPLETED', 'NO_SHOW')
 }
 
 entity "Sensor_Logs" as logs {
@@ -26,15 +27,11 @@ entity "Sensor_Logs" as logs {
   --
   *room_id : INT <<FK>>
   motion_detected : BOOLEAN
-  temperature_value : FLOAT
   recorded_at : DATETIME
 }
 
-' HUBUNGAN ANTAR TABEL
-' Satu ruangan bisa punya banyak log history
-rooms ||..|{ logs : "has history"
-
-' Satu ruangan bisa punya banyak jadwal reservasi
-rooms ||..|{ reservations : "has bookings"
+' Relasi antar tabel
+rooms ||..o{ reservations : "has bookings"
+rooms ||..o{ logs : "logs history"
 
 @enduml
