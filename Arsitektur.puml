@@ -1,0 +1,27 @@
+@startuml
+allow_mixing
+skinparam componentStyle rectangle
+
+package "IoT Layer" {
+  component "ESP32 Controller" as ESP
+  component "PIR Sensor" as PIR
+  PIR --> ESP
+}
+
+package "Server Layer" {
+  component "Node.js Backend" as API
+  database "MySQL Database" as DB
+  API <--> DB
+}
+
+package "Client Layer" {
+  component "React Dashboard" as Web
+  actor "Admin/Pelayan" as User
+}
+
+' Relations
+ESP .down.> API : "HTTP/MQTT (JSON)"
+API .down.> Web : "REST API / WebSocket"
+Web .right.> User : "Visual Interface"
+
+@enduml
