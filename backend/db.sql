@@ -31,4 +31,4 @@ CREATE TABLE sensor_logs (
 );
 
 -- Data Dummy Awal
-INSERT INTO rooms (name, status) VALUES ('VIP Room 1', 'AVAILABLE'), ('VIP Room 2', 'AVAILABLE');
+INSERT INTO rooms (name, status) VALUES ('VIP Room 1', 'AVAILABLE');
