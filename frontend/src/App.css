@@ -1,5 +1,27 @@
 .App {
   text-align: center;
+  font-family: Arial, sans-serif;
+  max-width: 600px; /* Batasi lebar agar rapi */
+  margin: 0 auto;
+}
+
+.monitor-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.big-status-card {
+  width: 100%;
+  padding: 40px;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s ease;
+}
+
+table {
+  background-color: white;
 }
 
 .App-logo {
